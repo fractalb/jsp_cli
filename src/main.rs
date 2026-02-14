@@ -8,7 +8,7 @@ fn main() -> io::Result<()> {
     stdin.read_to_string(&mut buffer)?;
     println!("{}", buffer);
 
-    match jsp::jsp_parse_json(&mut buffer) {
+    match jsp::jsp_parse_json(&buffer) {
         Ok(x) => {
             println!("===JSON START====");
             println!("{}", x);
@@ -17,7 +17,7 @@ fn main() -> io::Result<()> {
         }
         Err(e) => {
             println!("Error: {:?}", e);
-            Err(io::Error::new(io::ErrorKind::Other, "Invalid JSON"))
+            Err(io::Error::other("Invalid JSON"))
         }
     }
 }
